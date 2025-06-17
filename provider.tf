@@ -15,7 +15,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "cloudfront-s3lab-sudhakar"
-    key    = "terraform/ngnix/terraform.tfstate"
+    key    = "terraform/nginx/terraform.tfstate"
     region = "us-east-1"
   }
 }
