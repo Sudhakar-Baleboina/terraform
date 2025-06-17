@@ -1,6 +1,6 @@
-resource "aws_security_group" "jenkins_sg" {
-  name        = "jenkins-sg"
-  description = "Allow SSH and Jenkins (8080)"
+resource "aws_security_group" "nginx_sg" {
+  name        = "nginx-sg"
+  description = "Allow SSH and nginx (80)"
 
   ingress {
     description = "SSH"
@@ -11,7 +11,7 @@ resource "aws_security_group" "jenkins_sg" {
   }
 
   ingress {
-    description = "Jenkins Web"
+    description = "nginx Web"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
@@ -26,10 +26,10 @@ resource "aws_security_group" "jenkins_sg" {
   }
 }
 
-resource "aws_instance" "jenkins_server" {
+resource "aws_instance" "nginx_server" {
   ami                         = "ami-084568db4383264d4"
   instance_type               = "t2.micro"
-  vpc_security_group_ids      = [aws_security_group.jenkins_sg.id]
+  vpc_security_group_ids      = [aws_security_group.nginx_sg.id]
   associate_public_ip_address = true
 
   user_data = file("./nginx.sh")
